@@ -1,10 +1,15 @@
 def reduce_spaces(line):
     file = open(line, 'r')
-    file_lst = file.readline()
-    for letter in file_lst:
-        if letter ==" ":
-            letter.replace(" ", "")
-    return file_lst
+    file_lst = file.read()
+    words = file_lst.split("")
+    print(words)
+    lst = []
+    for spc in words:
+        lst.append(spc)
+        while " " in lst:
+            lst.remove(" ")
+            print(lst)
+
     file.close()
 
 
