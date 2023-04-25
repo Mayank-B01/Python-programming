@@ -1,17 +1,18 @@
 def reduce_spaces(line):
-    file = open(line, 'r')
-    file_lst = file.read()
-    words = file_lst.split("")
-    print(words)
+    words = line.split()
     lst = []
     for spc in words:
         lst.append(spc)
-        while " " in lst:
-            lst.remove(" ")
-            print(lst)
+    while " " in lst:
+        lst.remove(" ")
+    string = ""
+    for j in lst:
+        string = string + j
+    print(string)
 
-    file.close()
 
-
-print(reduce_spaces(input("Enter the file name")))
+file_name = input("Enter file name:")
+file = open(file_name, 'r')
+file_lst = file.read()
+print(reduce_spaces(file_lst))
 
