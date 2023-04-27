@@ -1,6 +1,20 @@
 from os.path import exists
 
 
+def continue_again():
+    while True:
+        try:
+            chance = input("Would you like to encrypt or decrypt another message? (y/n):")
+            if chance == 'y':
+                return True
+            elif chance == 'n':
+                return False
+            else:
+                raise Exception
+        except Exception:
+            print("Invalid input!")
+
+
 # defining a function to display welcome message
 def welcome():
     """This functions displays the welcome message to the user"""
@@ -30,11 +44,13 @@ def enter_message():
     while True:
         # asking user input for encrypt or decrypt
         choice = input(" Would you like to encrypt(e) or decrypt(d):")
-        if choice.lower() == "e" or choice.lower() == "d":
+        if choice.lower() == "e":
             # asking user to input the message
-            message = input("Enter the message")
-            shift = shift_val()
-            return message.upper(), shift
+            message = input("What message would you like to encrypt:")
+            return message.upper(), choice
+        elif choice.lower() == "d":
+            message = input("What message would you like to decrypt:")
+            return message.upper(), choice
         else:
             print("Invalid Mode")
             continue
@@ -69,6 +85,93 @@ def decrypt(message, shift):
     return new_message
 
 
+def process_file(f_name, s_mode):
+    """This functions encrypts / decrypts the lines in a file and store
+    them in a list"""
+    lst = []
+    with open(f_name, "r") as file:
+        shift = shift_val()
+        if s_mode == "e":
+            for line in file:
+                for word in line:
+                    message = encrypt(word.upper(), shift)
+                    lst.append(message)
+        else:
+            for line in file:
+                for word in line:
+                    message = decrypt(word.upper(), shift)
+                    lst.append(message)
+    return lst
+
+
 def is_file(file_name):
     """This functions checks whether the file exists or not and returns Boolean value"""
     return exists(file_name)
+
+
+def write_messages(lst_strings):
+    """This function write contents of encrypted / decrypted file from list to a new text file"""
+    while True:
+        file = input("Output written to:")
+        with open(file, "w") as new_file:
+            for letter in lst_strings:
+                new_file.write(letter)
+            print("Message added successfully")
+            break
+
+
+def message_or_file():
+    while True:
+        choice = input("Would you like to encrypt(e) of decrypt(d)?:")
+        if choice != "e" or choice != "d":
+            print("Invalid mode")
+            continue
+        else:
+            while True:
+                choice_mode = input("Would you like to read from a file(f) or the console(c)?:")
+                if choice_mode != "c" and choice != "f":
+                    print("Invalid Mode")
+                    continue
+                else:
+                    if choice_mode == "c" and choice == "e":
+                        text = input("What message would you like to encrypt:")
+                        file = None
+                    elif choice_mode == "c" and choice == "d":
+                        text = input("What message would you like to decrypt:")
+                        file = None
+                    else:
+                        text = None
+                        file = input("Enter a file name:")
+                return choice, text, file
+
+
+def main():
+    welcome()
+    run_again = True
+    file_run = False
+    while True:
+        if file_run:
+            choice, message, file = message_or_file()
+        else:
+            message, choice = enter_message()
+            file = None
+        shift = shift_val()
+        if file is None:
+            if choice == "e":
+                print(encrypt(message, shift))
+            else:
+                print(decrypt(message, shift))
+        else:
+            while not is_file(file):
+                print("File not found")
+                file = input("Enter file name:")
+            file_change = process_file(file, choice)
+            write_messages(file_change)
+        if run_again:
+            file_run = True
+            run_again = continue_again()
+            continue
+    print("Thank You for using Caesar Cipher. Goodbye!! ")
+
+
+main()

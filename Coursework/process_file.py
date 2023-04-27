@@ -38,12 +38,14 @@ def process_file(f_name, s_mode):
     lst = []
     with open(f_name, "r") as file:
         shift = shift_val()
-        for line in file:
-            for word in line:
-                if s_mode == "e":
+        if s_mode == "e":
+            for line in file:
+                for word in line:
                     message = encrypt(word.upper(), shift)
                     lst.append(message)
-                else:
+        else:
+            for line in file:
+                for word in line:
                     message = decrypt(word.upper(), shift)
                     lst.append(message)
     return lst
