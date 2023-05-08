@@ -102,13 +102,13 @@ def message_or_file():
     """This function determine whether the program will cipher a message in console or file"""
     while True:
         choice_ed = input('Would you like to encrypt (e) or decrypt (d):').lower()      # asking choice for what typ of conversion
-        if choice_ed != 'e' or choice_ed != 'd':      # Invalid input case
+        if not (choice_ed == 'e' or choice_ed == 'd'):      # Invalid input case
             print('Invalid Mode')
             continue
         else:               # valid input case
             while True:
                 choice_type = input('Would you like enter in console (c) or file (f):').lower()     # asking whether converting message or file
-                if choice_type != 'c' or choice_type != 'f':  # case for invalid input
+                if not (choice_type == 'c' or choice_type == 'f'):  # case for invalid input
                     print('Invalid Mode')
                     continue
                 else:       # valid input case
@@ -119,7 +119,7 @@ def message_or_file():
                         text_input = input('What message would you like to encrypt:').upper()
                         file_name = None             # setting file case to None
                     else:   # case for file
-                        file_name = input('What message would you like to decrypt:').upper()
+                        file_name = input('What file would you like to encrypt or decrypt:').upper()
                         text_input = None
                 return choice_ed, text_input, file_name
 
@@ -143,13 +143,10 @@ def want_to_continue():
 def main():
     welcome()  # call welcome function
     still_continue = True
-    run_file = False
+    run_file = True
     while still_continue:
         if run_file:
             choice, message, file1 = message_or_file()  # call message_or_file function
-        else:
-            choice, message = enter_message()  # call enter message function
-            file1 = None
         shift_number = enter_shift()  # call enter_shift function
         if file1 is None:
             if choice == 'e':
@@ -158,7 +155,7 @@ def main():
                 print(decrypt(message, shift_number))
         else:
             while not is_file(file1):
-                print('File not found{Fore')
+                print('File not found')
                 file1 = input('What is the name of the file:').upper()
             # call process_file function
             changed_text_list = process_file(file1, choice, shift_number)
