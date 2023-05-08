@@ -102,7 +102,7 @@ def message_or_file():
     """This function determine whether the program will cipher a message in console or file"""
     while True:
         choice_ed = input('Would you like to encrypt (e) or decrypt (d):').lower()      # asking choice for what typ of conversion
-        if not (choice_ed == 'e' or choice_ed == 'd'):      # Invalid input case
+        if choice_ed != 'e' or choice_ed != 'd':      # Invalid input case
             print('Invalid Mode')
             continue
         else:               # valid input case

@@ -1,25 +1,26 @@
+# defining a function
+def check_quotes(lines):
+    single_quote = 0
+    double_quote = 0
+    for label in lines:
+        if label == "'":
+            single_quote = single_quote + 1
+        elif label == '"':
+            double_quote = double_quote + 1
+        else:
+            single_quote = single_quote
+            double_quote = double_quote
+    if single_quote > 1 or double_quote > 1:    # condition for checking only one quote mark
+        if single_quote % 2 == 0 and double_quote == 0:
+            print(True)
+        else:
+            print(False)
+    else:
+        print(True)
+
+
 file_name = input("Enter file name:")       # asking user to input file name
 file = open(file_name, "r")     # opening the file
 line = file.read()      # reading the file
 file.close()            # closing the file
-
-
-# defining a function
-def check_quotes(lines):
-    quote = "Today's high temperature will be 75 degrees"
-    line1 = quote.split()
-    lst1 = []
-    for letter in line1:
-        lst1.append(letter)
-    lst2 = []
-    line2 = line.split()
-    for label in line2:
-        lst2.append(label)
-
-    set1 = set(lst1)
-    set2 = set(lst2)
-    common = set1.issubset(set2)
-    return common
-
-
-print(line,"=", check_quotes(line))
+check_quotes(line)

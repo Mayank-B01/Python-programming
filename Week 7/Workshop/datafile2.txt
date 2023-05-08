@@ -1,1 +1,1 @@
-"Today's high temperature will be 75 degrees"
+'Today's high temperature will be 75 degrees'
