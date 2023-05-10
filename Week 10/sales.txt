@@ -1,0 +1,4 @@
+productid,productname,category,UnitSold,UnitPrice
+101, MSI, Laptop, 50, 30000
+102, Coke, Drink, 500, 50
+102, Smart, Tv, 100, 2045
