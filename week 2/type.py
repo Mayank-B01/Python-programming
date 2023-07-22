@@ -1,35 +1,34 @@
-#aking user to imput two numbers
+# asking user to input two numbers
 
-num1=int(input("enter first number:"))
-num2=int(input("enter second number:"))
+num1 = int(input("enter first number:"))
+num2 = int(input("enter second number:"))
 
-#addition
-print("Sum:",num1+num2)
+# addition
+print("Sum:", num1+num2)
 
-#subtraction
-print("Subtraction:",num1-num2)
+# subtraction
+print("Subtraction:", num1-num2)
 
-#multiplication
-print ("Multiplication:",num1*num2)
+# multiplication
+print("Multiplication:", num1*num2)
 
-#division
-print("Division:",num1/num2)
+# division
+print("Division:", num1/num2)
 
-#Enter weight and height
+# Enter weight and height
 
-Weight=input("enter the weight in pounds:")
-Height=input("enter the height in inches:")
+Weight = input("enter the weight in pounds:")
+Height = input("enter the height in inches:")
 
-#converting to floating
+# converting to floating
 
-weight=float(Weight)
-height=float(Height)
+weight = float(Weight)
+height = float(Height)
 
-#BMI Conversion
+# BMI Conversion
 
-BMI=(weight *703)/(height)**2
+BMI = (weight * 703) / (height ** 2)
 
-#display BMI
+# display BMI
 
-print("The user body mass index is:",BMI)
-
+print("The user body mass index is:", BMI)
